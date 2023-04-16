@@ -122,16 +122,13 @@ def create_access_token(data: dict, expires_delta: timedelta | None = None):
 
 @app.post("/token", response_model=Token)
 def auth(form_data: Annotated[OAuth2PasswordRequestForm, Depends()]):
-    user_dict = app.database["users"].find_one({
-        "email": form_data.username
-    })
-    if not user_dict:
+    user = authenticate_user(form_data.username, form_data.password)
+    if not user:
         raise HTTPException(status_code=400, detail="Incorrect username or password")
-    user = User(**user_dict)
-    hashed_password = fake_hash_password(form_data.password)
-    if not hashed_password == user.password:
-        raise HTTPException(status_code=400, detail="Incorrect username or password")
-    return {"access_token": user.email, "token_type": "bearer"}
+    access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+    access_token = create_access_token(data={"sub": user.email}, expires_delta=
+    access_token_expires)
+    return {"access_token": access_token, "token_type": "bearer"}
 
 def fake_decode_token(token):
     user = app.database["users"].find_one({
