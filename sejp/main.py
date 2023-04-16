@@ -1,7 +1,7 @@
-# from typing import 
-from fastapi import FastAPI, Response, status
+from fastapi import FastAPI, Response, status, Depends, HTTPException
 from fastapi.encoders import jsonable_encoder
-from typing import Optional
+from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+from typing import Optional, Annotated
 from pydantic import BaseModel, Field
 from pymongo import MongoClient
 from dotenv import dotenv_values
@@ -42,12 +42,9 @@ class User(BaseModel):
             }
         }
     
-@app.get("/user")
-def read_user():
-    pass
 
 @app.post("/user", response_description="Create a new user", 
-    status_code=status.HTTP_201_CREATED, response_model=User)
+          status_code=status.HTTP_201_CREATED, response_model=User)
 def create_user(new_user: User):
     new_user_ = jsonable_encoder(new_user)
     new_user_ = app.database["users"].insert_one(new_user_)
@@ -80,7 +77,55 @@ def create_job():
 @app.put("/job/{job_id}")
 def modify_job():
     pass
+fake_users_db = {
+    "johndoe": {
+        "username": "johndoe",
+        "full_name": "John Doe",
+        "email": "johndoe@example.com",
+        "hashed_password": "fakehashedsecret",
+        "disabled": False,
+    },
+    "alice": {
+        "username": "alice",
+        "full_name": "Alice Wonderson",
+        "email": "alice@example.com",
+        "hashed_password": "fakehashedsecret2",
+        "disabled": True,
+    },
+}
 
-@app.get("/auth")
-def auth():
-    pass
+class UserInDB():
+    hashed_password: str
+def fake_hash_password(s):
+    return "fakehashed" + s
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
+@app.post("/token")
+def auth(form_data: Annotated[OAuth2PasswordRequestForm, Depends()]):
+    user_dict = fake_users_db.get(form_data.username)
+    if not user_dict:
+        raise HTTPException(status_code=400, detail="Incorrect username or password")
+    user = user_dict
+    hashed_password = fake_hash_password(form_data.password)
+    if not hashed_password == user["hashed_password"]:
+        raise HTTPException(status_code=400, detail="Incorrect username or password")
+    return {"access_token": user["username"], "token_type": "bearer"}
+
+def fake_decode_token(token):
+    user = fake_users_db.get(token)
+    return user
+def get_current_user(token: Annotated[str, Depends(oauth2_scheme)]):
+    user = fake_decode_token(token)
+    if not user:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid authentication credentials",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+    return user
+def get_current_active_user(current_user: Annotated[User, Depends(get_current_user)]):
+    if current_user.disabled:
+        raise HTTPException(status_code=400, detail="Inactive User")
+    return current_user
+@app.get("/user")
+def read_user(current_user: Annotated[User, Depends(get_current_active_user)]):
+    return current_user
