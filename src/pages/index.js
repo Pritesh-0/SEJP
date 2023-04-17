@@ -4,6 +4,8 @@ import bgi2 from '/public/bgi2.svg'
 import Navbar from '/src/pages/components/Navbar.jsx'
 import Hero from '/src/pages/components/Hero.jsx'
 import Jobs from '/src/pages/components/Jobs.jsx'
+import Login from '/src/pages/components/Login.jsx'
+import About from '/src/pages/components/About.jsx'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -16,6 +18,9 @@ export default function Home() {
         <Hero /> 
       </div>
       <Jobs/>
+      <About/>
+      {/* <Login/>   */}
+
       
     </main>
   )
