@@ -73,7 +73,8 @@ class JobSearch(BaseModel):
 @app.post("/search")
 def list_jobs(matches: int, like: JobSearch):
     max_matches = min(20, matches) if matches else 20
-    matching_jobs = list(app.database["jobs"].find(filter=dict(like),
+    print(dict(like))
+    matching_jobs = list(app.database["jobs"].find({k:v for k,v in dict(like).items() if v != None},
                          limit=max_matches))
     return matching_jobs
 
