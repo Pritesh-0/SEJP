@@ -34,6 +34,7 @@ class User(BaseModel):
     password: str = Field(...)
     skills: Optional[list[str]]
     bookmarked: Optional[list[str]]
+    disabled: bool | None = False
     class Config:
         allow_population_by_field_name = True
         schema_extra = {
@@ -56,27 +57,38 @@ def create_user(new_user: User):
         {"_id": new_user_.inserted_id})
     return created_user
 
-@app.put("/user")
-def modify_user():
-    pass
-
 class Job(BaseModel):
+    id: str = Field(default_factory=lambda: str(ulid.ULID()), alias="_id")
     position: str = Field(...)
     employer: str = Field(...)
     description: str = Field(...)
     required_skills: list[str]
+    apply_link: str = Field(...)
 
-@app.get("/job")
-def list_jobs():
-    pass
+class JobSearch(BaseModel):
+    position: Optional[str]
+    employer: Optional[str]
+    required_skills: Optional[list[str]]
+
+@app.post("/search")
+def list_jobs(matches: int, like: JobSearch):
+    max_matches = min(20, matches) if matches else 20
+    matching_jobs = list(app.database["jobs"].find(filter=dict(like),
+                         limit=max_matches))
+    return matching_jobs
 
 @app.get("/job/{job_id}")
-def read_job():
-    pass
+def read_job(id: str):
+    if job := app.database["jobs"].find_one({"_id": id}) is not None:
+        return job
+    raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Job with ID {id} not found")
 
 @app.post("/job")
-def create_job():
-    pass
+def create_job(job: Job) -> Job:
+    new_job = jsonable_encoder(job)
+    new_job = app.database["jobs"].insert_one(new_job)
+    created_job = app.database["jobs"].find_one({"_id": new_job.inserted_id})
+    return created_job
 
 @app.put("/job/{job_id}")
 def modify_job():
@@ -130,11 +142,6 @@ def auth(form_data: Annotated[OAuth2PasswordRequestForm, Depends()]):
     access_token_expires)
     return {"access_token": access_token, "token_type": "bearer"}
 
-def fake_decode_token(token):
-    user = app.database["users"].find_one({
-        "email": token
-    })
-    return user
 def get_current_user(token: Annotated[str, Depends(oauth2_scheme)]):
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
@@ -159,3 +166,8 @@ def get_current_active_user(current_user: Annotated[User, Depends(get_current_us
 @app.get("/user")
 def read_user(current_user: Annotated[User, Depends(get_current_active_user)]):
     return current_user
+
+@app.put("/user")
+def modify_user(current_user: Annotated[User, Depends(get_current_active_user)], updated_user: User):
+    app.database["users"].update_one({"_id": current_user._id}, {"$set": updated_user})
+    return User(app.database["users"].find_one({"_id": current_user._id}))
