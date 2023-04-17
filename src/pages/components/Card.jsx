@@ -87,7 +87,7 @@ export default function Home() {
             <div className='flex flex-col text-black py-5 text-l'>
                 <div className='flex bg-green-600 rounded-md mt-7 py-2.5 px-4 mr-9'>
                     <AiOutlinePlayCircle className='text-3xl' />
-                    <h2 className='px-5'>
+                    <h2 className='px-8'>
                         Apply Now
                     </h2>
                 </div>
