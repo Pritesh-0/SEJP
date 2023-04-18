@@ -13,6 +13,10 @@ import ulid
 config = dotenv_values(".env")
 app = FastAPI()
 
+origins = ["http://localhost:3000", "http://localhost"]
+
+app.add_middleware(allow_origins=origins)
+
 @app.on_event("startup")
 def startup_db_client():
     app.mongodb_client = MongoClient(config["ATLAS_URI"])
