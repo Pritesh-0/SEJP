@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta
 from fastapi import FastAPI, Response, status, Depends, HTTPException
 from fastapi.encoders import jsonable_encoder
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from typing import Optional, Annotated
 from pydantic import BaseModel, Field
@@ -15,7 +16,7 @@ app = FastAPI()
 
 origins = ["http://localhost:3000", "http://localhost"]
 
-app.add_middleware(allow_origins=origins)
+app.add_middleware(CORSMiddleware, allow_origins=origins)
 
 @app.on_event("startup")
 def startup_db_client():
