@@ -4,11 +4,11 @@ export default function Home() {
     return (
         <div className="">
           <nav className='py-12 px-12 flex justify-between relative'>
-            <div className='text-3xl px-9'>
+            <div className='text-3xl px-9 cursor-pointer'>
               SEJP
             </div>
             <div className=''>
-              <ul className='flex items-center text-black text-xl space-x-10'>
+              <ul className='flex items-center text-black text-xl space-x-10 cursor-pointer'>
                 <li className='px-4'>About</li>
                 <li className='px-4'>Contact</li>
                 <li className='px-4'>Jobs</li>
