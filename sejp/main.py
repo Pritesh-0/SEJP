@@ -104,6 +104,9 @@ pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
 def get_user(email: str):
+    user = app.database["users"].find_one({"email": email})
+    if not user:
+        raise HTTPException(status_code=400, detail="Incorrect username or password")
     return User(**app.database["users"].find_one({
         "email": email
     }))
