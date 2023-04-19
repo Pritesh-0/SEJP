@@ -7,34 +7,34 @@ export default function Home(){
             <Image src={foot} className='absolute'/>
             <div className='text-black text-2xl w-screen h-screen grid grid-cols-5 grid-rows-10'>
                 <ul className='col-start-2 row-start-2 relative'>
-                    <li>
+                    <li className='py-3'>
                         OUR WEBSITE
                     </li>
-                    <li>
+                    <li className='py-1'>
                         About Us
                     </li>
-                    <li>
+                    <li className='py-1'>
                         Contact Us
                     </li>
-                    <li>
+                    <li className='py-1'>
                         Community
                     </li>
-                    <li>
+                    <li className='py-1'>
                         Student Perks
                     </li>
-                    <li>
+                    <li className='py-1'>
                         Career
                     </li>
-                    <li>
+                    <li className='py-1'>
                         Perks
                     </li>
                 </ul>
                 <ul className='col-start-3 row-start-2 relative'>
-                    <li>JOB TITLES</li>
-                    <li>Full Stack Developer</li>
-                    <li>MERN Stack Developer</li>
-                    <li>Agile Developer</li>
-                    <li>UI/UX Design</li>
+                    <li className='py-3'>JOB TITLES</li>
+                    <li className='py-1'>Full Stack Developer</li>
+                    <li className='py-1'>MERN Stack Developer</li>
+                    <li className='py-1'>Agile Developer</li>
+                    <li className='py-1'>UI/UX Design</li>
                 </ul>
 
                 <div className='relative col-start-4 row-start-2 text-xl'>
