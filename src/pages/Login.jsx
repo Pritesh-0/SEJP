@@ -25,7 +25,7 @@ export default function Home(){
         }
     }
     return(
-        <div className='h-screen grid grid-rows-4 grid-cols-8 m-auto'>
+        <div className='h-screen grid grid-rows-4 grid-cols-8 m-auto' id="login">
             <div className="bg-gray-700 row-start-2 col-start-4 col-span-2 row-span-4 flex flex-col text-xl rounded-3xl mb-36">
                 <div><CiUser className='text-9xl bg-white text-gray-950 rounded-full mx-auto mt-20  '/></div>
                 <form onSubmit={handleSubmit} className='mx-auto mt-10'>
