@@ -15,7 +15,7 @@ export default function Home() {
                 <li className='px-4 '>
                   <TbBellRinging className='text-2xl' />
                 </li>
-                <div className='px-3 py-2 bg-white text-black rounded-md cursor-pointer'>
+                <div className='px-3 py-2 bg-white text-black rounded-md cursor-pointer' >
                   My account
                 </div>
               </ul>
