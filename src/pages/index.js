@@ -6,6 +6,8 @@ import Hero from '/src/pages/components/Hero.jsx'
 import Jobs from '/src/pages/components/Jobs.jsx'
 import Login from '/src/pages/Login.jsx'
 import About from '/src/pages/components/About.jsx'
+import Footer from '/src/pages/components/Footer.jsx'
+import Register from '/src/pages/Register.jsx'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -19,8 +21,10 @@ export default function Home() {
       </div>
       <Jobs/>
       <About/>
-      <Login/>  
+      <Register/>  
 
+      <Footer/>
+      
       
     </main>
   )
