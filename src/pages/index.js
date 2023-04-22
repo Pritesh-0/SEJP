@@ -22,7 +22,6 @@ export default function Home() {
       <Jobs/>
       <About/>  
       <Footer/>
-      <Register/>
       
     </main>
   )
