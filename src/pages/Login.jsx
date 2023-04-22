@@ -2,6 +2,7 @@ import { CiUser } from 'react-icons/ci'
 import { AiOutlineMail, AiFillLock } from 'react-icons/ai'
 import { FaUser } from 'react-icons/fa'
 import axios from 'axios';
+import Link from 'next/link';
 const qs = require('qs');
 
 export default function Home(){
@@ -27,7 +28,10 @@ export default function Home(){
     return(
         <div className='h-screen grid grid-rows-4 grid-cols-8 m-auto' id="login">
             <div className="bg-gray-700 row-start-2 col-start-4 col-span-2 row-span-4 flex flex-col text-xl rounded-3xl mb-36">
-                <div><CiUser className='text-9xl bg-white text-gray-950 rounded-full mx-auto mt-20  '/></div>
+                <h1 className='text-center text-3xl mt-6'>
+                    Login
+                </h1>
+                <div><CiUser className='text-9xl bg-white text-gray-950 rounded-full mx-auto mt-8  '/></div>
                 <form onSubmit={handleSubmit} className='mx-auto mt-10'>
                 <div className='flex'>
                     <AiOutlineMail/>
@@ -44,7 +48,7 @@ export default function Home(){
                 </form>
                 <div className='bg-gray-950 my-3 h-3 w-full'></div>
                 <button className='text-3xl text-center text-gray-400 mt-1 cursor-pointer'>
-                    REGISTER
+                    <Link href='/Register'>REGISTER</Link> 
                 </button>
             </div>
         </div>
