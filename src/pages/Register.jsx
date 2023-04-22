@@ -2,50 +2,62 @@ import { CiUser } from 'react-icons/ci'
 import { AiOutlineMail, AiFillLock } from 'react-icons/ai'
 import { FaUser } from 'react-icons/fa'
 import axios from 'axios';
+import Link from 'next/link';
 const qs = require('qs');
 
 export default function Home(){
     const handleSubmit = async(event) => {
         event.preventDefault()  
         const data = {
-            grant_type: "",
-            scope: "",
-            client_id: "",
-            client_secret: "",
-            username: event.target.username.value,
+            name: event.target.name.value,
+            email: event.target.email.value,
             password: event.target.password.value,
         }
-        const formData = qs.stringify(data)
-        const response = await fetch("http://localhost:5000/token", {method: 'POST', headers: {'accept': 'application/json','Content-Type': 'application/x-www-form-urlencoded',}, body: formData,})
+        const formData = JSON.stringify(data)
+        console.log(formData)
+        const response = await fetch("http://localhost:5000/user", {method: 'POST', headers: {'accept': 'application/json','Content-Type': 'application/json'}, body: formData,})
         const responseCode = await response.status
-        if (responseCode != 200) {
-            alert("Login failed, check username or password")
+        if (responseCode != 201) {
+            alert("Registeration failed!!")
         } else {
-            alert("Logged In!")
+            alert("Successfully Registered")
         }
     }
     return(
         <div className='h-screen grid grid-rows-4 grid-cols-8 m-auto' id="register">
             <div className="bg-gray-700 row-start-2 col-start-4 col-span-2 row-span-4 flex flex-col text-xl rounded-3xl mb-36">
-                <div><CiUser className='text-9xl bg-white text-gray-950 rounded-full mx-auto mt-20  '/></div>
+                
                 <form onSubmit={handleSubmit} className='mx-auto mt-10'>
-                <div className='flex'>
-                    <AiOutlineMail/>
-                    <input placeholder='Email ID' id='email' type='email' name='username' required className='bg-transparent ml-6 '></input>
+                    <h1 className='text-3xl text-center text-blue-500'>
+                        REGISTER
+                    </h1>
+                    <h2 className='mb-6 text-s text-center'>
+                        Join Our Platform Today!
+                    </h2>
+                <div className='flex flex-col'>
+                    Name
+                    <input placeholder='Andrew Tate' id='name' type='text' name='name' required className='bg-transparent'></input>
+                </div> 
+                <div className='bg-white h-px my-3'></div>
+                <div className='flex flex-col'>
+                    Email
+                    <input placeholder='andate@gmail.com' id='email' type='email' name='email' required className='bg-transparent'></input>
                 </div>         
                 <div className='bg-white h-px my-3'></div>
-                <div className='flex'>
-                    <AiFillLock/>
-                    <input placeholder='Password' id='Password' type='password' name='password' required className='bg-transparent ml-6'></input>
+                <div className='flex flex-col'>
+                    Password
+                    <input placeholder='******' id='Password' type='password' name='password' required className='bg-transparent'></input>
                 </div>
                 <div className='bg-white h-px my-3'></div>
-                <button className='bg-gray-950 px-10 py-1.5 rounded-md mt-4 '>Login</button>
-                
+                <button className='bg-gray-950 px-10 py-1.5 rounded-md mt-4 '>Register</button>
+                <div className='flex text-xs mt-2'>
+                    <h1 className='mr-1'>
+                        Already a Member 
+                    </h1>
+                    <Link href='/Login' className='text-blue-500'>Sign In</Link>
+                </div>
                 </form>
-                <div className='bg-gray-950 my-3 h-3 w-full'></div>
-                <button className='text-3xl text-center text-gray-400 mt-1 cursor-pointer'>
-                    REGISTER
-                </button>
+                
             </div>
         </div>
     )
