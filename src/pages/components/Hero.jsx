@@ -1,6 +1,9 @@
+import Link from 'next/link';
+
+
 export default function Home(){
     return(
-        <div className='flex flex-col items-center justify-center relative text-center text-black mt-4 mx-auto'>
+        <div className='flex flex-col items-center justify-center relative text-center text-black mt-4 mx-auto' id="#about">
           <div className='text-4xl py-12 text-left'>
             <h1 >
               SOFTWARE ENGINEERING
@@ -12,7 +15,8 @@ export default function Home(){
             </h2>
           </div>
           <div className='px-4 py-2 bg-white rounded-md text-xl cursor-pointer'>
-            Learn More
+          <Link href='#about'>Learn More</Link>
+            
           </div>
         </div>
 

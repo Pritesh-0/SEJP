@@ -1,4 +1,5 @@
 import { TbBellRinging } from 'react-icons/tb'
+import Link from 'next/link';
 
 export default function Home() {
     return (
@@ -9,7 +10,7 @@ export default function Home() {
             </div>
             <div className=''>
               <ul className='flex items-center text-black text-xl space-x-10 cursor-pointer'>
-                <li className='px-4'>About</li>
+                <li className='px-4'><Link href='#about'>About</Link> </li>
                 <li className='px-4'>Contact</li>
                 <li className='px-4'>Jobs</li>
                 <li className='px-4 '>
