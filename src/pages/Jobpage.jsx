@@ -1,0 +1,46 @@
+import { AiOutlineSearch } from 'react-icons/ai'
+import Link from 'next/link';
+import Card from '/src/pages/components/Card.jsx'
+
+export default function Home() {
+    return (
+        <div className="">
+            <nav className='py-12 px-12 flex justify-between relative'>
+                <div className='text-3xl px-9 cursor-pointer'>
+                    SEJP
+                </div>
+                <div className=''>
+                    <ul className='flex items-center text-black text-xl space-x-10 cursor-pointer'>
+                        <div className='px-3 py-2 bg-white text-black rounded-md cursor-pointer' >
+                            My account
+                        </div>
+                    </ul>   
+                </div>
+            </nav>
+            <div className='bg-gray-950'>
+            <div className='bg-gray-800 h-px my-3'></div>
+                <form className='flex ml-10'>
+                <div className='flex'>
+                    <AiOutlineSearch className=' text-xl mr-3 mt-1'/>
+                    <h1 className='mr-3 mt-1'>Search:</h1>
+                    <input placeholder='Frontend' id='query' type='text' name='query' required className='bg-transparent'></input>
+                </div> 
+                <button className='bg-black px-10 py-1.5 rounded-md '>SEARCH</button>
+                
+                </form>
+                <div className='bg-gray-800 h-px my-3'></div>
+            </div>
+
+            <div>
+
+            </div>
+            <div className='ml-60'>
+                <Card/>
+            </div>
+
+
+        </div>
+
+    )
+}
+
