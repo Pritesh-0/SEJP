@@ -3,7 +3,6 @@ import { AiOutlineMail, AiFillLock } from 'react-icons/ai'
 import { FaUser } from 'react-icons/fa'
 import axios from 'axios';
 import Link from 'next/link';
-const qs = require('qs');
 
 export default function Home(){
     const handleSubmit = async(event) => {
@@ -23,6 +22,8 @@ export default function Home(){
             alert("Successfully Registered")
         }
     }
+
+    
     return(
         <div className='h-screen grid grid-rows-4 grid-cols-8 m-auto' id="register">
             <div className="bg-gray-700 row-start-2 col-start-4 col-span-2 row-span-4 flex flex-col text-xl rounded-3xl mb-36">

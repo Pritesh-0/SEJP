@@ -17,7 +17,7 @@ export default function Home() {
                   <TbBellRinging className='text-2xl' />
                 </li>
                 <div className='px-3 py-2 bg-white text-black rounded-md cursor-pointer' >
-                  My account
+                  <Link href='User'>My account</Link>
                 </div>
               </ul>
             </div>
