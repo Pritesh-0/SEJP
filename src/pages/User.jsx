@@ -2,6 +2,7 @@ import axios from 'axios';
 import Link from 'next/link';
 
 import { CiUser } from 'react-icons/ci'
+import { useEffect } from 'react';
 // axios.get('http://localhost:5000/user')
 //   .then(function (response) {
 //     // handle success
@@ -15,20 +16,21 @@ import { CiUser } from 'react-icons/ci'
 //     // always executed
 //   });
 
-fetch('http://localhost:5000/user')
-  .then(response => {
-    //handle response            
-    console.log(response);
-  })
-  .then(data => {
-    //handle data
-    console.log(data);
-  })
-  .catch(error => {
-    //handle error
-  });
+
+
 
 export default function Home() {
+    useEffect(() => {
+        fetch('http://localhost:5000/user', {headers: {'accept': 'application/json', 'Authorization':  window.localStorage.token_type + ' ' + window.localStorage.access_token}})
+        .then(response => {        
+          console.log(response);
+        })
+        .then(data => {
+          console.log(data);
+        })
+        .catch(error => {
+        })
+    });
     return (
         <div>
         <nav className='py-6 px-12 flex justify-between relative'>

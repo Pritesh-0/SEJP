@@ -19,6 +19,10 @@ export default function Home(){
         const formData = qs.stringify(data)
         const response = await fetch("http://localhost:5000/token", {method: 'POST', headers: {'accept': 'application/json','Content-Type': 'application/x-www-form-urlencoded',}, body: formData,})
         const responseCode = await response.status
+        const body = await response.json()
+        window.localStorage.setItem('access_token', body.access_token)
+        window.localStorage.setItem('token_type', body.token_type)
+        console.log(body)
         if (responseCode != 200) {
             alert("Login failed, check username or password")
         } else {
