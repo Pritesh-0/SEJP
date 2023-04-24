@@ -2,7 +2,7 @@ import axios from 'axios';
 import Link from 'next/link';
 
 import { CiUser } from 'react-icons/ci'
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 // axios.get('http://localhost:5000/user')
 //   .then(function (response) {
 //     // handle success
@@ -20,17 +20,18 @@ import { useEffect } from 'react';
 
 
 export default function Home() {
+    const [token, setToken] = useState("?");
+    const [user, setUser] = useState({"name": "Not logged in", "email": ""});
     useEffect(() => {
-        fetch('http://localhost:5000/user', {headers: {'accept': 'application/json', 'Authorization':  window.localStorage.token_type + ' ' + window.localStorage.access_token}})
-        .then(response => {        
-          console.log(response);
-        })
-        .then(data => {
-          console.log(data);
-        })
-        .catch(error => {
-        })
-    });
+        async function fetchData() {
+            setToken(window.localStorage.token_type + ' ' + window.localStorage.access_token);
+            const response = await fetch('http://localhost:5000/user', {headers: {'accept': 'application/json', 'Authorization':  window.localStorage.token_type + ' ' + window.localStorage.access_token}});
+            const body = await response.json();
+            console.log(body);
+            setUser(body);
+        }
+        fetchData();
+    }, [setToken, setUser]);
     return (
         <div>
         <nav className='py-6 px-12 flex justify-between relative'>
@@ -53,13 +54,10 @@ export default function Home() {
             <CiUser className='text-white text-9xl border-2 rounded-3xl m-16'/>
             <div className=' mt-28'>
             <h1 className='text-3xl'>
-                Name
+                {user.name}
             </h1>
             <h2>
-                Position
-            </h2>
-            <h2>
-                Location
+                {user.email}
             </h2>
             </div>
 
@@ -70,15 +68,8 @@ export default function Home() {
 
             <div className='mx-20'>
                 <ul className='mt-10 text-xl'>
-                    <li className='py-2'>About</li>
                     <div className='bg-gray-700 h-px my-3'></div>
                     <li className='py-2'>My Jobs</li>
-                    <div className='bg-gray-700 h-px my-3'></div>
-                    <li className='py-2'>Email ID</li>
-                    <div className='bg-gray-700 h-px my-3'></div>
-                    <li className='py-2'>Portfolio</li>
-                    <div className='bg-gray-700 h-px my-3'></div>
-                    <li className='py-2'>Education</li>
                     <div className='bg-gray-700 h-px my-3'></div>
                 </ul>
             </div>
