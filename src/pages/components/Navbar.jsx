@@ -12,7 +12,7 @@ export default function Home() {
               <ul className='flex items-center text-black text-xl space-x-10 cursor-pointer'>
                 <li className='px-4'><Link href='#about'>About</Link> </li>
                 <li className='px-4'><Link href='#footer'>Contact</Link></li>
-                <li className='px-4'>Jobs</li>
+                <li className='px-4'><Link href='Jobpage'>Jobs</Link></li>
                 <li className='px-4 '>
                   <TbBellRinging className='text-2xl' />
                 </li>

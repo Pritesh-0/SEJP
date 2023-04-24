@@ -32,9 +32,13 @@ export default function Home() {
             </div>
 
             <div>
-
+                <ul className='flex text-black ml-44 cursor-pointer'>
+                    <li className=' bg-blue-500 mr-4 px-3 py-1'>Skills</li>
+                    <li className=' bg-blue-500 mr-4 px-3 py-1'>Company</li>
+                </ul>
             </div>
-            <div className='ml-60'>
+            <div className='bg-gray-800 h-px my-3'></div>
+            <div className='ml-72'>
                 <Card/>
             </div>
 
