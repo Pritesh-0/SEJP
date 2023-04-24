@@ -23,9 +23,9 @@ export default function Home() {
                 <div className='flex'>
                     <AiOutlineSearch className=' text-xl mr-3 mt-1'/>
                     <h1 className='mr-3 mt-1'>Search by:</h1>
-                    <input placeholder='Position' id='query' type='text' name='query' className='bg-transparent'></input>
-                    <input placeholder='Skills' id='query' type='text' name='query' className='bg-transparent'></input>
-                    <input placeholder='Company' id='query' type='text' name='query' className='bg-transparent'></input>
+                    <input placeholder='Position' id='position' type='text' name='position' className='bg-transparent mx-4'></input>
+                    <input placeholder='Skills' id='skills' type='text' name='skills' className='bg-transparent mx-4'></input>
+                    <input placeholder='Company' id='company' type='text' name='company' className='bg-transparent mx-4 '></input>
                 </div> 
                 <button className='bg-black px-10 py-1.5 rounded-md '>SEARCH</button>
                 
