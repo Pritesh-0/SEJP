@@ -59,8 +59,8 @@ export default function Home() {
             </div>
             <div className='bg-gray-800 h-px my-3'></div> */}
             <div className='ml-72'>
-                {results.map(function(object, id) {
-                    return <Card/>;
+                {results.map(function(obj, id) {
+                    return <Card imgPath={obj.icon_path} position={obj.position} employer={obj.employer} requiredSkills={obj.required_skills.join() }/>;
                 })}
             </div>
 

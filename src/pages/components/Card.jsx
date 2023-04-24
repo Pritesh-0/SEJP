@@ -3,21 +3,21 @@ import { AiOutlinePlayCircle, AiFillStar, AiOutlineFieldTime, AiOutlineCheckCirc
 import { IoMdThumbsUp } from 'react-icons/io'
 import { TiTick } from 'react-icons/ti'
 import Image from 'next/image'
-import google from '/public/google.png'
+// import google from '/public/meta.png'
 
-export default function Home() {
+export default function Home({ imgPath, position, employer, requiredSkills }) {
     return (
         <div className='flex relative bg-gray-950 mx-10 my-10 rounded-xl text-white'>
             <div className='flex px-5 py-5 ml-5 mt-5'>
-                <Image src={google} className='h-16 w-24' />
+                <Image src={imgPath} width={24} height={16} className='h-16 w-24' />
             </div>
             <div className='grow px-5 py-5'>
                 <div className=''>
                     <h1 className='text-3xl'>
-                        Google
+                        {employer}
                     </h1>
                     <h2 className='text-2xl py-5'>
-                        UX/UI designer, Google Pay
+                        {position}
                     </h2>
                 </div>
                 <div className='flex text-2xl'>
