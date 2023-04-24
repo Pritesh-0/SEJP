@@ -22,8 +22,10 @@ export default function Home() {
                 <form className='flex ml-10'>
                 <div className='flex'>
                     <AiOutlineSearch className=' text-xl mr-3 mt-1'/>
-                    <h1 className='mr-3 mt-1'>Search:</h1>
-                    <input placeholder='Frontend' id='query' type='text' name='query' required className='bg-transparent'></input>
+                    <h1 className='mr-3 mt-1'>Search by:</h1>
+                    <input placeholder='Position' id='query' type='text' name='query' className='bg-transparent'></input>
+                    <input placeholder='Skills' id='query' type='text' name='query' className='bg-transparent'></input>
+                    <input placeholder='Company' id='query' type='text' name='query' className='bg-transparent'></input>
                 </div> 
                 <button className='bg-black px-10 py-1.5 rounded-md '>SEARCH</button>
                 
@@ -31,13 +33,13 @@ export default function Home() {
                 <div className='bg-gray-800 h-px my-3'></div>
             </div>
 
-            <div>
+            {/* <div>
                 <ul className='flex text-black ml-44 cursor-pointer'>
                     <li className=' bg-blue-500 mr-4 px-3 py-1'>Skills</li>
                     <li className=' bg-blue-500 mr-4 px-3 py-1'>Company</li>
                 </ul>
             </div>
-            <div className='bg-gray-800 h-px my-3'></div>
+            <div className='bg-gray-800 h-px my-3'></div> */}
             <div className='ml-72'>
                 <Card/>
             </div>
@@ -48,3 +50,6 @@ export default function Home() {
     )
 }
 
+// position
+// skills
+// company
