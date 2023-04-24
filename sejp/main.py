@@ -64,6 +64,7 @@ def create_user(new_user: User):
 
 class Job(BaseModel):
     id: str = Field(default_factory=lambda: str(ulid.ULID()), alias="_id")
+    icon_path: str = Field(...)
     position: str = Field(...)
     employer: str = Field(...)
     description: str = Field(...)
