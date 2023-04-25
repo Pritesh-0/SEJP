@@ -6,10 +6,15 @@ import { useState } from 'react';
 export default function Home() {
     const handleSearch = async(event) => {
         event.preventDefault()
-        const data = {
-            // position: event.target.position.value.toString(),
-            employer: event.target.company.value.toString(),
-            // required_skills: []
+        let data = {}
+        if (event.target.company.value.toString().length != 0) {
+            data['employer'] = event.target.company.value.toString()
+        }
+        if (event.target.position.value.toString().length != 0) {
+            data['position'] = event.target.position.value.toString()
+        }
+        if (event.target.skills.value.toString().length != 0) {
+            data['required_skills'] = event.target.skills.value.toString().split(' ')
         }
         const formData = JSON.stringify(data)
         console.log(formData)
@@ -60,7 +65,7 @@ export default function Home() {
             <div className='bg-gray-800 h-px my-3'></div> */}
             <div className='ml-72'>
                 {results.map(function(obj, id) {
-                    return <Card imgPath={obj.icon_path} position={obj.position} employer={obj.employer} requiredSkills={obj.required_skills.join() }/>;
+                    return <Card imgPath={obj.icon_path} position={obj.position} employer={obj.employer} requiredSkills={obj.required_skills}/>;
                 })}
             </div>
 

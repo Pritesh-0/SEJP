@@ -6,6 +6,7 @@ import Image from 'next/image'
 // import google from '/public/meta.png'
 
 export default function Home({ imgPath, position, employer, requiredSkills }) {
+    console.log(requiredSkills);
     return (
         <div className='flex relative bg-gray-950 mx-10 my-10 rounded-xl text-white'>
             <div className='flex px-5 py-5 ml-5 mt-5'>
@@ -21,12 +22,6 @@ export default function Home({ imgPath, position, employer, requiredSkills }) {
                     </h2>
                 </div>
                 <div className='flex text-2xl'>
-                    <div className='flex'>
-                        <SlLocationPin className='text-2xl' />
-                        <h2 className='px-4'>
-                            London, GB
-                        </h2>
-                    </div>
                     <div className='flex ml-10'>
                         <AiOutlineFieldTime className='text-2xl' />
                         <h2 className='px-4'>
@@ -49,36 +44,14 @@ export default function Home({ imgPath, position, employer, requiredSkills }) {
                     </div>
                 </div>
                 <div className='flex flex-wrap border-4 border-gray-900 rounded-xl'>
-                    <div className='flex text-xl mr-9 py-3 px-9'>
-                        <AiOutlineCheckCircle className='text-green-500 text-2xl'/>
-                        <h2 className='px-3'>
-                            4-5 Years Experience
-                        </h2>
-                    </div>
-                    <div className='flex text-xl mr-9 py-3 px-9'>
-                        <AiOutlineCheckCircle className='text-green-500 text-2xl'/>
-                        <h2 className='px-3'>
-                            User Experience(UX)
-                        </h2>
-                    </div>
-                    <div className='flex text-xl mr-9 py-3 px-9'>
-                        <AiOutlineCheckCircle className='text-green-500 text-2xl'/>
-                        <h2 className='px-3'>
-                            Full Stack
-                        </h2>
-                    </div>
-                    <div className='flex text-xl mr-9 py-3 px-9'>
-                        <AiOutlineCheckCircle className='text-green-500 text-2xl'/>
-                        <h2 className='px-3'>
-                            HTML
-                        </h2>
-                    </div>
-                    <div className='flex text-xl mr-9 py-3 px-9'>
-                        <AiOutlineCheckCircle className='text-green-500 text-2xl'/>
-                        <h2 className='px-3'>
-                            CSS
-                        </h2>
-                    </div>
+                    {requiredSkills.map(function(skill, id) {
+                        return (<div className='flex text-xl mr-9 py-3 px-9'>
+                            <AiOutlineCheckCircle className='text-green-500 text-2xl'/>
+                            <h2 className='px-3'>
+                                {skill.toString()}
+                            </h2>
+                        </div>)
+                    })}
                 </div>
             </div>
 
