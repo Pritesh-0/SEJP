@@ -37,12 +37,12 @@ export default function Home(){
                     </h2>
                 <div className='flex flex-col'>
                     Name
-                    <input placeholder='Andrew Tate' id='name' type='text' name='name' required className='bg-transparent'></input>
+                    <input placeholder='Rick Astley' id='name' type='text' name='name' required className='bg-transparent'></input>
                 </div> 
                 <div className='bg-white h-px my-3'></div>
                 <div className='flex flex-col'>
                     Email
-                    <input placeholder='andate@gmail.com' id='email' type='email' name='email' required className='bg-transparent'></input>
+                    <input placeholder='Never.Gonna@giveyou.up' id='email' type='email' name='email' required className='bg-transparent'></input>
                 </div>         
                 <div className='bg-white h-px my-3'></div>
                 <div className='flex flex-col'>
