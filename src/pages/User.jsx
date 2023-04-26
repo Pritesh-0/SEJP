@@ -36,7 +36,7 @@ export default function Home() {
         <div>
         <nav className='py-6 px-12 flex justify-between relative'>
                 <div className='text-3xl px-9 cursor-pointer'>
-                    SEJP
+                    <Link href='/'>SEJP</Link> 
                 </div>
                 <div className=''>
                     <ul className='flex items-center text-black text-xl space-x-10 cursor-pointer'>
